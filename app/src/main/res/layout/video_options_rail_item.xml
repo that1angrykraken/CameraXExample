@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/videoOptionsRailItem"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/video_options_rail_height"
+    android:padding="12dp"
+    tools:background="@drawable/overlay_background_dark"
+    tools:clipToOutline="true">
+
+    <TextView
+        android:id="@+id/lblVideoOptionsRailItem"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textColor="@color/white"
+        android:textSize="@dimen/video_options_rail_item_text"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="OPTION_#"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imgVideoOptionsRailItem"
+        android:layout_width="@dimen/video_options_rail_item_icon_size"
+        android:layout_height="@dimen/video_options_rail_item_icon_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

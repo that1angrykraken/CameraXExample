@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/optionsRailContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToOutline="true"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="@dimen/video_options_rail_container_margin_horizontal">
+
+    <LinearLayout
+        android:id="@+id/videoOptionsRail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_options_rail_height"
+        android:background="@drawable/overlay_background_dark"
+        android:clipToOutline="true"
+        android:gravity="center_vertical"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/btnVideoOptionsRailToggle"
+        android:layout_width="@dimen/video_options_rail_toggle_button_size"
+        android:layout_height="@dimen/video_options_rail_toggle_button_size"
+        android:background="@drawable/overlay_background_dark"
+        android:clipToOutline="true"
+        android:layout_gravity="end">
+
+        <ImageView
+            android:layout_width="@dimen/video_options_rail_item_icon_size"
+            android:layout_height="@dimen/video_options_rail_item_icon_size"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</FrameLayout>
