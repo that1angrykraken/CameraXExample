@@ -1,6 +1,7 @@
 package hopper.prototype.camerax
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val container = findViewById<VideoOptionsRailContainer>(R.id.optionsRailContainer).apply {
             setUp(listOf(VideoOption.VideoSize(VideoResolution.FHD, 60)))
             setOnOptionClickListener {
-
+                Log.i(TAG, "onCreate: $it")
             }
         }
         val showBtn = findViewById<Button>(R.id.btnShowContainer).apply {
@@ -37,5 +38,9 @@ class MainActivity : AppCompatActivity() {
                 container.hideContainer()
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="video_options_rail_height">40dp</dimen>
+    <dimen name="video_options_rail_height">44dp</dimen>
     <dimen name="video_options_rail_container_margin_horizontal">24dp</dimen>
     <dimen name="video_options_rail_item_text">14sp</dimen>
-    <dimen name="video_options_rail_item_icon_size">26dp</dimen>
-    <dimen name="video_options_rail_toggle_button_size">@dimen/video_options_rail_height</dimen>
+    <dimen name="video_options_rail_item_icon_size">32dp</dimen>
+    <dimen name="video_options_rail_toggle_size">@dimen/video_options_rail_height</dimen>
+    <dimen name="video_options_rail_toggle_margin">6dp</dimen>
     <dimen name="video_options_rail_padding_end">12dp</dimen>
 </resources>
