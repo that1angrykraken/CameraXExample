@@ -2,16 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/videoOptionsRailItem"
-    android:layout_width="wrap_content"
-    android:layout_height="@dimen/video_options_rail_height"
-    android:padding="12dp"
-    android:minWidth="64dp"
+    android:id="@+id/togglableItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="12dp"
     tools:background="@drawable/overlay_background_dark"
-    tools:clipToOutline="true">
+    tools:clipToOutline="true"
+    tools:layout_width="100dp"
+    tools:layout_height="44dp">
 
     <TextView
-        android:id="@+id/lblVideoOptionsRailItem"
+        android:id="@+id/txtTogglableItem"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
@@ -25,13 +26,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="OPTION_#"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        tools:textColor="@color/toggled_item_content_color"/>
 
     <ImageView
-        android:id="@+id/imgVideoOptionsRailItem"
+        android:id="@+id/imgTogglableItem"
         android:layout_width="@dimen/video_options_rail_item_icon_size"
         android:layout_height="@dimen/video_options_rail_item_icon_size"
-        android:scaleType="centerInside"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

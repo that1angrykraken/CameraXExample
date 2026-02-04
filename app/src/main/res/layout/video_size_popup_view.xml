@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/overlay_background_dark"
+        android:clipToOutline="true"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:id="@+id/txtVideoSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Video size"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btnClosePopup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnClosePopup" />
+
+        <FrameLayout
+            android:id="@+id/btnClosePopup"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/overlay_background_dark"
+                android:src="@drawable/ic_close"
+                android:scaleType="centerInside"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/txtResolution"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="Resolution"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnClosePopup" />
+
+        <LinearLayout
+            android:id="@+id/resolutionOptionsContainer"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:paddingVertical="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtResolution"
+            app:layout_constraintTop_toTopOf="@+id/txtResolution" />
+
+        <TextView
+            android:id="@+id/txtFps"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="Fps"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtResolution" />
+
+        <LinearLayout
+            android:id="@+id/fpsOptionsContainer"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:paddingVertical="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtResolution"
+            app:layout_constraintTop_toBottomOf="@+id/resolutionOptionsContainer" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

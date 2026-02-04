@@ -6,15 +6,12 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
-import androidx.core.graphics.alpha
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import hopper.prototype.camerax.common.model.VideoOption
 import hopper.prototype.camerax.databinding.VideoOptionsRailContainerBinding
 import hopper.prototype.camerax.databinding.VideoOptionsRailItemBinding
-import hopper.prototype.camerax.model.VideoOption
-import kotlin.math.log
 
 class VideoOptionsRailContainer @JvmOverloads constructor(
     context: Context,
@@ -22,7 +19,6 @@ class VideoOptionsRailContainer @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var settled = false
     private val binding = VideoOptionsRailContainerBinding
         .inflate(LayoutInflater.from(context), this, true)
     private val itemBindingMap = mutableMapOf<String, VideoOptionsRailItemBinding>()
@@ -31,23 +27,14 @@ class VideoOptionsRailContainer @JvmOverloads constructor(
 
     init {
         binding.btnVideoOptionsRailToggle.setOnClickListener {
-            setOptionsRailVisible(!binding.videoOptionsRail.isVisible)
+            setOptionsRailVisible(!binding.videoOptionsRailWrapper.isVisible)
         }
     }
 
-    fun setUp(options: List<VideoOption>) {
-        if (settled) {
-            Log.i(TAG, "setUp: already settled")
-            return
-        }
+    fun updateItems(options: List<VideoOption>) {
         options.forEach { option ->
-            val itemBinding = VideoOptionsRailItemBinding
-                .inflate(LayoutInflater.from(context), binding.videoOptionsRail, true)
-            val key = checkNotNull(option::class.simpleName)
-            itemBindingMap[key] = itemBinding
             updateItem(option)
         }
-        settled = true
     }
 
     fun updateItem(option: VideoOption) {
@@ -56,17 +43,21 @@ class VideoOptionsRailContainer @JvmOverloads constructor(
             return
         }
         videoOptionMap[key] = option
-        val itemBinding = itemBindingMap[key] ?: run {
-            Log.w(TAG, "updateItem: cannot find binding for $key")
-            return
-        }
+
+        val itemBinding = itemBindingMap[key]
+            ?: VideoOptionsRailItemBinding
+                .inflate(LayoutInflater.from(context), binding.videoOptionsRail, true)
+                .also { itemBindingMap[key] = it }
+
         option.iconId?.let {
             itemBinding.imgVideoOptionsRailItem.setImageResource(it)
             itemBinding.imgVideoOptionsRailItem.isVisible = true
             return
         }
-        itemBinding.lblVideoOptionsRailItem.text = option.label
-        itemBinding.lblVideoOptionsRailItem.isVisible = true
+        option.label?.let {
+            itemBinding.lblVideoOptionsRailItem.text = it
+            itemBinding.lblVideoOptionsRailItem.isVisible = true
+        }
     }
 
     fun setOnOptionClickListener(listener: (VideoOption) -> Unit) {
@@ -84,11 +75,11 @@ class VideoOptionsRailContainer @JvmOverloads constructor(
 
     fun setOptionsRailVisible(visible: Boolean, duration: Long = 200, onEnd: (() -> Unit)? = null) {
         val targetVisibility = if (visible) VISIBLE else INVISIBLE
-        val railView = binding.videoOptionsRail
+        val railView = binding.videoOptionsRailWrapper
         if (isAnimating || railView.visibility == targetVisibility) {
             return
         }
-        val railWidth = binding.videoOptionsRail.width
+        val railWidth = railView.width
         val (startW, endW) = if (visible) 1 to railWidth else railWidth to 1
         if (visible) {
             railView.visibility = VISIBLE
@@ -133,7 +124,7 @@ class VideoOptionsRailContainer @JvmOverloads constructor(
             }
             isAnimating = true
         }
-        if (binding.videoOptionsRail.isVisible) {
+        if (binding.videoOptionsRailWrapper.isVisible) {
             setOptionsRailVisible(false, 100, hideToggle)
         } else {
             hideToggle()

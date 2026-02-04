@@ -9,24 +9,31 @@
     android:paddingHorizontal="@dimen/video_options_rail_container_margin_horizontal">
 
     <HorizontalScrollView
-        android:id="@+id/videoOptionsRail"
+        android:id="@+id/videoOptionsRailWrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/video_options_rail_height"
         android:background="@drawable/overlay_background_dark"
         android:clipToOutline="true"
-        android:gravity="center_vertical"
+        android:overScrollMode="always"
         android:visibility="invisible"
-        tools:visibility="visible"
-        android:overScrollMode="always"/>
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/videoOptionsRail"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
 
     <FrameLayout
         android:id="@+id/btnVideoOptionsRailToggle"
         android:layout_width="@dimen/video_options_rail_item_icon_size"
         android:layout_height="@dimen/video_options_rail_item_icon_size"
-        android:background="@drawable/overlay_background_dark"
+        android:layout_gravity="end"
         android:layout_margin="@dimen/video_options_rail_toggle_margin"
-        android:clipToOutline="true"
-        android:layout_gravity="end">
+        android:background="@drawable/overlay_background_dark"
+        android:clipToOutline="true">
 
         <ImageView
             android:layout_width="match_parent"

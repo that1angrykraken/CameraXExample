@@ -3,12 +3,15 @@ package hopper.prototype.camerax
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.FrameLayout
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import hopper.prototype.camerax.model.VideoOption
-import hopper.prototype.camerax.model.VideoResolution
+import hopper.prototype.camerax.common.model.VideoOption
+import hopper.prototype.camerax.common.model.VideoResolution
+import hopper.prototype.camerax.view.VideoOptionPopupViewFactory
 import hopper.prototype.camerax.view.VideoOptionsRailContainer
 
 class MainActivity : AppCompatActivity() {
@@ -22,10 +25,22 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val vm by viewModels<MainViewModel>()
+        val popupViewHolder = findViewById<FrameLayout>(R.id.videoOptionPopupViewHolder)
         val container = findViewById<VideoOptionsRailContainer>(R.id.optionsRailContainer).apply {
-            setUp(listOf(VideoOption.VideoSize(VideoResolution.FHD, 60)))
-            setOnOptionClickListener {
-                Log.i(TAG, "onCreate: $it")
+            vm.videoOptions.observe(this@MainActivity) {
+                updateItems(it)
+                setOnOptionClickListener {
+                    val popupView = VideoOptionPopupViewFactory(this@MainActivity, it, vm::updateOption)
+                        .create()
+                        ?: return@setOnOptionClickListener
+                    popupViewHolder.addView(popupView)
+                    popupView.setOnMenuDismissCallback {
+                        popupViewHolder.removeView(popupView)
+                        Log.d(TAG, "onCreate: popup dismissed")
+                    }
+                    popupView.animateShow()
+                }
             }
         }
         val showBtn = findViewById<Button>(R.id.btnShowContainer).apply {
